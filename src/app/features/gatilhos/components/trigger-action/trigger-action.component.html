@@ -1,0 +1,85 @@
+<div class="item-linha" [formGroup]="form">
+  <div class="item-card acao">
+    <div class="acao__selecao">
+      <!-- Tipo -->
+      <div class="form-field">
+        <label class="form-overline" [for]="uid + '-tipo'">{{ 'portal.generic.label.type' | translate }}</label>
+        <p-dropdown
+          formControlName="tipo"
+          [inputId]="uid + '-tipo'"
+          [options]="tiposAcao"
+          appendTo="body"
+          styleClass="campo"
+          panelStyleClass="campo-painel"
+        >
+          <ng-template pTemplate="selectedItem" let-tipo>{{ tagTipoAcao[tipo] | translate }}</ng-template>
+          <ng-template pTemplate="item" let-tipo>{{ tagTipoAcao[tipo] | translate }}</ng-template>
+        </p-dropdown>
+      </div>
+
+      <!-- Valor (webhook cadastrado) -->
+      <div class="form-field">
+        <label class="form-overline" [for]="uid + '-webhook'">{{ 'portal.generic.label.value' | translate }}</label>
+        <p-dropdown
+          formControlName="webhookId"
+          [inputId]="uid + '-webhook'"
+          [options]="webhooks"
+          optionLabel="nome"
+          optionValue="id"
+          [filter]="true"
+          filterBy="nome"
+          appendTo="body"
+          styleClass="campo"
+          panelStyleClass="campo-painel"
+          [placeholder]="'portal.generic.placeholder.select-webhook' | translate"
+          (onChange)="aoMudarWebhook()"
+        />
+      </div>
+    </div>
+
+    @if (webhook; as wh) {
+      <div class="acao__detalhes">
+        <div class="acao__info">
+          <span class="acao__info-rotulo">{{ 'portal.generic.label.url' | translate }}</span>
+          <code class="acao__url">{{ wh.url }}</code>
+        </div>
+
+        <div class="acao__info">
+          <span class="acao__info-rotulo">{{ 'iclass.generic.label.description' | translate }}</span>
+          <span class="acao__info-valor">{{ wh.descricao }}</span>
+        </div>
+
+        <div class="acao__info">
+          <span class="acao__info-rotulo">{{ 'portal.generic.label.method' | translate }}</span>
+          <span class="metodo" [class]="'metodo--' + wh.metodo.toLowerCase()">{{ wh.metodo }}</span>
+        </div>
+
+        <div class="form-field">
+          <label class="acao__info-rotulo" [for]="uid + '-corpo'">{{ 'portal.generic.label.request-body-json' | translate }}</label>
+          <app-trigger-json-editor
+            formControlName="corpo"
+            [inputId]="uid + '-corpo'"
+            [invalido]="exibirErro(form.controls.corpo)"
+            [describedBy]="exibirErro(form.controls.corpo) ? uid + '-corpo-erro' : undefined"
+          />
+          @if (exibirErro(form.controls.corpo)) {
+            <p class="form-error" [id]="uid + '-corpo-erro'">
+              {{ (form.controls.corpo.hasError('json') ? 'portal.generic.label.invalid-json' : 'portal.generic.label.required-field') | translate }}
+            </p>
+          }
+          <button type="button" class="link-btn acao__placeholders" (click)="verPlaceholders.emit()">
+            {{ 'portal.generic.label.view-available-placeholders' | translate }}
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <button
+    pButton
+    type="button"
+    icon="pi pi-trash"
+    class="btn--md btn--danger btn--text"
+    (click)="remover.emit()"
+  ></button>
+</div>

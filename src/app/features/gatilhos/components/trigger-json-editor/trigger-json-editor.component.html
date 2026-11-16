@@ -1,0 +1,23 @@
+<div class="json-editor" [class.json-editor--invalido]="invalido" [class.json-editor--desabilitado]="desabilitado()">
+  <div #gutter class="json-editor__gutter" aria-hidden="true">
+    @for (linha of linhas(); track linha) {
+      <span>{{ linha }}</span>
+    }
+  </div>
+  <textarea
+    #area
+    class="json-editor__area"
+    [id]="inputId"
+    [rows]="rows"
+    [disabled]="desabilitado()"
+    [attr.aria-invalid]="invalido"
+    [attr.aria-describedby]="describedBy"
+    wrap="off"
+    spellcheck="false"
+    autocomplete="off"
+    autocapitalize="off"
+    (input)="aoDigitar(area.value)"
+    (scroll)="sincronizarRolagem()"
+    (blur)="onTouched()"
+  ></textarea>
+</div>

@@ -1,0 +1,168 @@
+/* Design system do time (styles.css anexado).
+   A fonte Geist é carregada no src/index.html: um @import aqui ficaria depois
+   do tema do PrimeNG no bundle e seria ignorado pelo navegador. */
+
+/* ===== Tokens de texto =====
+   Escala: 11 / 13 / 14 / 16 / 24 px
+   Geist 600 títulos | 500 texto principal e rótulos | 400 texto secundário */
+:root {
+  --font-family: 'Geist', system-ui, sans-serif;
+  --font-family-text: 'Geist', system-ui, sans-serif;
+
+  --title-lg: 600 24px/32px var(--font-family-text);
+  --title-sm: 600 16px/24px var(--font-family-text);
+
+  --secondary-lg: 400 14px/21px var(--font-family-text);
+  --secondary-md: 400 13px/20px var(--font-family-text);
+  --secondary-sm: 400 11px/16px var(--font-family-text);
+
+  --label-field: 500 13px/20px var(--font-family-text);
+  --label-overline: 500 11px/16px var(--font-family-text);
+
+  --letter-spacing-overline: .03em;
+}
+
+/* ===== Classes de texto ===== */
+.t-title-lg { font: var(--title-lg); letter-spacing: -.015em; }
+.t-title-sm { font: var(--title-sm); letter-spacing: -.005em; }
+.t-label-field { font: var(--label-field); }
+
+body, button, input, select, textarea { font-family: 'Geist', system-ui, sans-serif; }
+
+body { margin: 0; background: #FAFAFA; font-family: 'Geist', system-ui, sans-serif; color: #1E293B; }
+
+@keyframes ui-skeleton { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+.ui-input { height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid #CBD5E1; background: #fff; color: #1E293B; font: var(--secondary-lg); box-sizing: border-box; width: 100%; }
+.ui-input:focus { outline: 2px solid #3B82F655; border-color: #3B82F6; }
+
+/* Par rótulo/valor dos cards */
+.kv { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.kv-k { font: var(--secondary-md); color: #9CA3AF; }
+.kv-v { font: var(--secondary-md); color: #212121; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Card de registro (filial, almoxarifado, repositório): cada card define as colunas na própria classe */
+.reg-card { display: grid; align-items: center; gap: 16px; min-height: 48px; padding: 8px 16px; box-sizing: border-box; background: #fff; border: 1px solid #E9EBF2; border-radius: 10px; box-shadow: 0 2px 6px rgba(16, 24, 40, .13); }
+.skeleton { height: 18px; border-radius: 4px; background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 37%, #F1F5F9 63%); background-size: 400% 100%; animation: ui-skeleton 1.4s ease infinite; }
+
+/* Painel das seções de vinculação */
+.insumo-layer { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #F1F2F4; border: 1px solid #E5E7EB; border-radius: 10px; }
+
+/* Ajustes de layout para p-button */
+.p-button.p-button-icon-only { width: auto; aspect-ratio: 1 / 1; padding: 0; justify-content: center; }
+.p-button:disabled { opacity: .5; }
+
+/* ===== Botões (styles.md) ===== */
+.p-button.btn--md { height: 32px; padding: 0 16px; font-size: 16px; gap: 6px; font-weight: 500; }
+.p-button.btn--md .p-button-icon { font-size: 16px; }
+.p-button.btn--md .p-button-label { font-weight: 500; }
+
+.p-button.btn--lg { height: 40px; padding: 0 20px; font-size: 16px; gap: 8px; font-weight: 500; }
+.p-button.btn--lg .p-button-icon { font-size: 20px; }
+.p-button.btn--lg .p-button-label { font-weight: 500; }
+
+.p-button.btn--primary { background: #3b82f6; color: #ffffff; border-color: transparent; border-radius: 4px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10); }
+.p-button.btn--primary:not(:disabled):hover { background: #1d4ed8; color: #ffffff; border-color: transparent; }
+
+.p-button.btn--secondary { background: #ffffff; color: #1d4ed8; border-color: #d9dce1; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10); }
+.p-button.btn--secondary:not(:disabled):hover { background: #f1f2f4; color: #1e40af; border-color: #d9dce1; }
+.p-button.btn--secondary:not(:disabled):active { background: #e2e4e8; color: #1d4ed8; border-color: #d9dce1; }
+.is-active > .p-button.btn--secondary { background: #e9f2ff; color: #1d4ed8; border-color: #60a5fa; }
+.p-button.btn--secondary:disabled { background: #ffffff; color: #93c5fd; border-color: #d9dce1; }
+
+.p-button.btn--neutral { background: #ffffff; color: #1f2937; border-color: #d9dce1; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10); }
+.p-button.btn--neutral:not(:disabled):hover { background: #f1f2f4; color: #111827; border-color: #d9dce1; }
+.p-button.btn--neutral:not(:disabled):active { background: #e2e4e8; color: #111827; border-color: #d9dce1; }
+.is-active > .p-button.btn--neutral { background: #e9f2ff; color: #1d4ed8; border-color: #60a5fa; }
+.is-active > .p-button.btn--neutral:not(:disabled):hover { background: #e9f2ff; color: #1d4ed8; border-color: #60a5fa; }
+
+.p-button.btn--danger { background: #dc2626; color: #ffffff; border-color: transparent; border-radius: 4px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10); }
+.p-button.btn--danger:not(:disabled):hover { background: #b91c1c; color: #ffffff; border-color: transparent; }
+
+.p-button.btn--danger.btn--text { color: #dc2626; justify-content: center; background: transparent; box-shadow: none; border: none; }
+.p-button.btn--danger.btn--text:not(:disabled):hover { background: #fef2f2; color: #dc2626; border-color: transparent; }
+
+/* botão de texto com a cor dos ícones do botão neutro */
+.p-button.btn--text.icon-neutral { color: #1f2937; }
+.p-button.btn--text.icon-neutral:not(:disabled):hover { background: #f1f2f4; color: #111827; }
+
+.p-button.p-button-icon-only { gap: 0; }
+
+.p-button.btn--md, .p-button.btn--lg { box-sizing: border-box; line-height: 1; }
+
+/* Ícones de 16px nos botões do cabeçalho da lista */
+.p-button.header-btn .p-button-icon { font-size: 16px; }
+
+/* Botões do modal em uma única linha */
+.p-dialog .p-dialog-footer .p-button { white-space: nowrap; }
+
+/* ===== Paginador: sem fundo, altura de 32px ===== */
+.p-paginator { background: transparent; border: none; padding: 4px 0; justify-content: flex-end; }
+.insumo-layer .p-paginator { border-top: 1px solid #F1F5F9; border-radius: 0 0 10px 10px; padding: 6px 12px; }
+
+.p-paginator.paginator--md .p-paginator-first,
+.p-paginator.paginator--md .p-paginator-prev,
+.p-paginator.paginator--md .p-paginator-next,
+.p-paginator.paginator--md .p-paginator-last,
+.p-paginator.paginator--md .p-paginator-pages .p-paginator-page { min-width: 32px; height: 32px; }
+
+/* ===== Painéis de filtro e ordenação ===== */
+.filter-panel, .sort-panel { padding: 10px 12px; background: #EBEDF0; border: 1px solid #D9DCE1; border-radius: 4px; }
+.filter-panel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.filter-panel__field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.filter-panel__label { font: var(--label-overline); letter-spacing: var(--letter-spacing-overline); text-transform: uppercase; color: #6B7280; }
+/* campo desabilitado pelo que já foi escolhido em outro filtro (ex.: tipo de repositório) */
+.filter-panel__field--disabled .filter-panel__label { color: #C2C7D0; }
+.filter-panel__control { display: flex; gap: 2px; min-width: 0; }
+.filter-panel__input.p-inputtext { flex: 1; min-width: 0; width: 100%; height: 32px; padding: 0 10px; border-color: #D9DCE1; border-radius: 4px; font-size: 13px; color: #1F2937; }
+.filter-panel__input.p-inputtext:enabled:hover { border-color: #3B82F6; }
+.filter-panel__input.p-inputtext:enabled:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #EFF6FF; }
+
+.sort-panel { display: flex; flex-direction: column; gap: 4px; }
+.sort-panel__label { font: var(--label-field); color: #4B5563; }
+.sort-panel__control { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.sort-panel__field { flex: 1; min-width: 0; }
+
+.filter-panel__operator.p-dropdown, .sort-panel__select.p-dropdown { width: 104px; height: 32px; align-items: center; border-color: #D9DCE1; border-radius: 4px; }
+.sort-panel__select.p-dropdown { width: 100%; }
+.filter-panel__operator.p-dropdown .p-dropdown-label, .sort-panel__select.p-dropdown .p-dropdown-label { padding: 0 0 0 10px; font-size: 13px; color: #1F2937; }
+.filter-panel__operator.p-dropdown .p-dropdown-trigger, .sort-panel__select.p-dropdown .p-dropdown-trigger { width: 28px; }
+.filter-panel__operator.p-dropdown .p-dropdown-trigger .p-icon, .sort-panel__select.p-dropdown .p-dropdown-trigger .p-icon { width: 12px; height: 12px; }
+.filter-panel__operator.p-dropdown:not(.p-disabled):hover, .sort-panel__select.p-dropdown:not(.p-disabled):hover { border-color: #3B82F6; }
+.filter-panel__operator.p-dropdown:not(.p-disabled).p-focus, .sort-panel__select.p-dropdown:not(.p-disabled).p-focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #EFF6FF; }
+.filter-panel__operator-panel.p-dropdown-panel .p-dropdown-items, .sort-panel__select-panel.p-dropdown-panel .p-dropdown-items { padding: 4px; }
+.filter-panel__operator-panel.p-dropdown-panel .p-dropdown-item, .sort-panel__select-panel.p-dropdown-panel .p-dropdown-item { padding: 6px 10px; border-radius: 4px; font-size: 13px; }
+.filter-panel__operator-panel.p-dropdown-panel .p-dropdown-item.p-highlight, .sort-panel__select-panel.p-dropdown-panel .p-dropdown-item.p-highlight { background: #E9F2FF; color: #1d4ed8; }
+
+/* campo multiselect do painel de filtros (Tipo repositório) */
+.filter-panel__multi.p-multiselect { width: 100%; }
+.filter-panel__multi.p-multiselect { height: 32px; align-items: center; border-color: #D9DCE1; border-radius: 4px; }
+.filter-panel__multi.p-multiselect .p-multiselect-label { padding: 0 0 0 10px; font-size: 13px; color: #1F2937; }
+.filter-panel__multi.p-multiselect .p-multiselect-label.p-placeholder { color: #6B7280; }
+.filter-panel__multi.p-multiselect .p-multiselect-trigger { width: 28px; }
+.filter-panel__multi.p-multiselect .p-multiselect-trigger .p-icon { width: 12px; height: 12px; }
+.filter-panel__multi.p-multiselect:not(.p-disabled):hover { border-color: #3B82F6; }
+.filter-panel__multi.p-multiselect:not(.p-disabled).p-focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #EFF6FF; }
+.filter-panel__multi-panel .p-multiselect-items { padding: 4px; }
+.filter-panel__multi-panel .p-multiselect-item { padding: 6px 10px; border-radius: 4px; font-size: 13px; }
+.filter-panel__multi-panel .p-multiselect-item.p-highlight { background: #E9F2FF; color: #1d4ed8; }
+
+/* campo multiselect com operador: ocupa o espaço ao lado do operador */
+.filter-panel__control > p-multiselect { display: block; flex: 1 1 0; min-width: 0; }
+.filter-panel__control .filter-panel__multi.p-multiselect { display: flex; width: 100%; min-width: 0; }
+
+/* ===== Chips (almoxarifados do repositório) ===== */
+
+/* ===== Estados de carga: vazio e erro ===== */
+.req-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 240px; color: #6B7280; font: var(--secondary-lg); }
+.req-empty p { margin: 0; }
+
+.load-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 24px; text-align: center; font: var(--secondary-md); color: #6A7282; }
+.load-state > .pi { font-size: 20px; color: #94A3B8; }
+.load-state--error > .pi { color: #DC2626; }
+.load-state p { margin: 0; }
+
+/* ===== Abas do detalhe: fundo transparente e conteúdo sem moldura ===== */
+.req-tabs .p-tabview-nav { background: transparent; }
+.req-tabs .p-tabview-nav li .p-tabview-nav-link { background: transparent; padding: 10px 16px; font-size: 14px; font-weight: 600; }
+.req-tabs .p-tabview-panels { background: transparent; padding: 16px 0 0; }

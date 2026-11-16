@@ -1,0 +1,146 @@
+:host {
+  --cabecalho-altura: 68px;
+
+  display: block;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.pagina__cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--cabecalho-altura);
+  padding: 0 28px;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
+  box-sizing: border-box;
+}
+
+.pagina__titulo {
+  margin: 0;
+  color: #1E293B;
+}
+
+.pagina__botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.pagina__criar {
+  display: inline-flex;
+
+  /* Botão desabilitado não recebe hover: deixa o wrapper receber e mostrar o tooltip */
+  .p-button:disabled {
+    pointer-events: none;
+  }
+}
+
+.pagina__conteudo {
+  padding: 28px 28px 64px;
+}
+
+/* Descrição | Status, Observações embaixo ocupando a largura toda */
+.dados {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+
+.dados__largo {
+  grid-column: 1 / -1;
+}
+
+.divisor {
+  margin: 40px 0 32px;
+  border: 0;
+  border-top: 1px solid #EEF0F3;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.secao__cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.secao__titulo {
+  margin: 0;
+  color: #1E293B;
+}
+
+.secao__subtitulo {
+  margin: 0;
+  font: var(--secondary-md);
+  color: #4B5563;
+}
+
+/* Lista de ações + painel de placeholders à direita quando aberto */
+.acoes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+
+  &--com-painel {
+    grid-template-columns: minmax(0, 1fr) 450px;
+  }
+}
+
+.acoes__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.acoes__painel {
+  position: sticky;
+  top: calc(var(--cabecalho-altura) + 16px);
+}
+
+/* Estado Carregando: blocos em skeleton (a animação vem da classe global .skeleton) */
+.esqueleto__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.esqueleto__rotulo {
+  width: 96px;
+  height: 14px;
+}
+
+.esqueleto__input {
+  height: 40px;
+  border-radius: 6px;
+}
+
+.esqueleto__textarea {
+  height: 80px;
+  border-radius: 6px;
+}
+
+.esqueleto__titulo {
+  width: 140px;
+  height: 20px;
+}
+
+.esqueleto__subtitulo {
+  width: 320px;
+  height: 14px;
+}
+
+.esqueleto__bloco {
+  height: 88px;
+  border-radius: 8px;
+}

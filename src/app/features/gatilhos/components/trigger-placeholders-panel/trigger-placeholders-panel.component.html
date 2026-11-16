@@ -1,0 +1,36 @@
+<aside class="painel">
+  <header class="painel__cabecalho">
+    <h3 class="painel__titulo">{{ 'portal.generic.label.available-placeholders' | translate }}</h3>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-times"
+      class="btn--md btn--text icon-neutral p-button-text"
+      (click)="fechar.emit()"
+    ></button>
+  </header>
+
+  <p-tabView styleClass="placeholders-tabs">
+    @for (grupo of grupos; track grupo.id) {
+      <p-tabPanel [header]="grupo.label">
+        <ul class="painel__lista">
+          @for (item of grupo.itens; track item.chave) {
+            <li class="painel__item">
+              <div class="painel__texto">
+                <span class="painel__label">{{ item.label }}</span>
+                <code class="painel__token">{{ item.token }}</code>
+              </div>
+              <button
+                pButton
+                type="button"
+                icon="pi pi-copy"
+                class="btn--md btn--text icon-neutral p-button-text"
+                (click)="copiar(item)"
+              ></button>
+            </li>
+          }
+        </ul>
+      </p-tabPanel>
+    }
+  </p-tabView>
+</aside>

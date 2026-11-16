@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+.painel {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(16, 24, 40, .08);
+}
+
+.painel__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px 12px 16px;
+}
+
+.painel__titulo {
+  margin: 0;
+  font: 500 14px/21px var(--font-family-text);
+  color: #1F2937;
+}
+
+.painel__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.painel__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px 8px 20px;
+
+  &:hover {
+    background: #F8FAFC;
+  }
+}
+
+.painel__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.painel__label {
+  font: var(--secondary-md);
+  color: #1F2937;
+}
+
+.painel__token {
+  overflow: hidden;
+  font: 400 12px/16px ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  color: #6B7280;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: all;
+}

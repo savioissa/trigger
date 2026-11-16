@@ -1,0 +1,155 @@
+<div class="grupo" role="group" [attr.aria-labelledby]="uid + '-titulo'">
+  <h3 class="grupo__titulo" [id]="uid + '-titulo'">{{ titulo }}</h3>
+
+  @if (condicoes.length) {
+    <div class="grupo__lista">
+      @for (condicao of condicoes.controls; track condicao; let i = $index) {
+        <div class="item-linha" [formGroup]="condicao">
+          <div class="item-card condicao">
+            <!-- Categoria -->
+            <div class="form-field">
+              <label class="form-overline" [for]="uid + '-' + i + '-categoria'">{{ 'portal.generic.label.category' | translate }}</label>
+              <p-dropdown
+                formControlName="categoriaId"
+                [inputId]="uid + '-' + i + '-categoria'"
+                [options]="grupos"
+                [group]="true"
+                optionGroupLabel="label"
+                optionGroupChildren="itens"
+                optionLabel="label"
+                optionValue="id"
+                appendTo="body"
+                styleClass="campo"
+                panelStyleClass="campo-painel"
+                [class.campo--invalido]="exibirErro(condicao.controls.categoriaId)"
+                [placeholder]="'portal.createso.placeholder.find-category' | translate"
+                (onChange)="aoMudarCategoria(condicao)"
+              >
+                <!-- Selecionado mostra "Grupo > Campo", como no layout -->
+                <ng-template pTemplate="selectedItem" let-categoria>{{ categoria.grupo }} &gt; {{ categoria.label }}</ng-template>
+              </p-dropdown>
+              @if (exibirErro(condicao.controls.categoriaId)) {
+                <p class="form-error">{{ 'portal.generic.label.required-field' | translate }}</p>
+              }
+            </div>
+
+            <!-- Operador -->
+            <div class="form-field">
+              <label class="form-overline" [for]="uid + '-' + i + '-operador'">{{ 'iclass.generic.label.select-operator' | translate }}</label>
+              <p-dropdown
+                formControlName="operador"
+                [inputId]="uid + '-' + i + '-operador'"
+                [options]="operadores"
+                scrollHeight="480px"
+                appendTo="body"
+                styleClass="campo"
+                panelStyleClass="campo-painel"
+                [class.campo--invalido]="exibirErro(condicao.controls.operador)"
+                [placeholder]="'portal.generic.label.select' | translate"
+                (onChange)="aoMudarOperador(condicao)"
+              >
+                <ng-template pTemplate="selectedItem" let-operador>{{ tagOperador[operador] | translate }}</ng-template>
+                <ng-template pTemplate="item" let-operador>{{ tagOperador[operador] | translate }}</ng-template>
+              </p-dropdown>
+              @if (exibirErro(condicao.controls.operador)) {
+                <p class="form-error">{{ 'portal.generic.label.required-field' | translate }}</p>
+              }
+            </div>
+
+            <!-- Valor: o controle depende do tipo da categoria -->
+            <div class="form-field">
+              <label class="form-overline" [for]="uid + '-' + i + '-valor'">{{ 'portal.generic.label.value' | translate }}</label>
+              @switch (categoriaDe(condicao)?.tipo) {
+                @case ('LISTA') {
+                  <p-dropdown
+                    formControlName="valor"
+                    [inputId]="uid + '-' + i + '-valor'"
+                    [options]="categoriaDe(condicao)?.valores ?? []"
+                    scrollHeight="480px"
+                    optionLabel="label"
+                    optionValue="id"
+                    appendTo="body"
+                    styleClass="campo"
+                    panelStyleClass="campo-painel"
+                    [class.campo--invalido]="exibirErro(condicao.controls.valor)"
+                    [placeholder]="(valorNaoSeAplica(condicao) ? 'portal.generic.placeholder.value-not-applicable' : 'portal.generic.placeholder.select-value') | translate"
+                  />
+                }
+                @case ('NUMERO') {
+                  <p-inputNumber
+                    formControlName="valor"
+                    [inputId]="uid + '-' + i + '-valor'"
+                    mode="decimal"
+                    [locale]="idioma"
+                    [minFractionDigits]="0"
+                    [maxFractionDigits]="2"
+                    styleClass="campo-host"
+                    inputStyleClass="campo"
+                    [class.campo--invalido]="exibirErro(condicao.controls.valor)"
+                    [placeholder]="(valorNaoSeAplica(condicao) ? 'portal.generic.placeholder.value-not-applicable' : 'portal.generic.placeholder.number-value') | translate"
+                  />
+                }
+                @case ('DATA') {
+                  <p-calendar
+                    formControlName="valor"
+                    [inputId]="uid + '-' + i + '-valor'"
+                    [showIcon]="true"
+                    iconDisplay="input"
+                    appendTo="body"
+                    styleClass="campo-host"
+                    inputStyleClass="campo"
+                    [class.campo--invalido]="exibirErro(condicao.controls.valor)"
+                    [placeholder]="valorNaoSeAplica(condicao) ? ('portal.generic.placeholder.value-not-applicable' | translate) : ''"
+                  />
+                }
+                @case ('TEXTO') {
+                  <input
+                    pInputText
+                    type="text"
+                    formControlName="valor"
+                    class="campo"
+                    [id]="uid + '-' + i + '-valor'"
+                    [class.campo--invalido]="exibirErro(condicao.controls.valor)"
+                    [placeholder]="(valorNaoSeAplica(condicao) ? 'portal.generic.placeholder.value-not-applicable' : 'portal.generic.placeholder.type-value') | translate"
+                  />
+                }
+                @default {
+                  <!-- Sem categoria: o controle fica desabilitado pelo formulário até a escolha -->
+                  <p-dropdown
+                    formControlName="valor"
+                    [inputId]="uid + '-' + i + '-valor'"
+                    [options]="[]"
+                    styleClass="campo"
+                    [placeholder]="'portal.generic.placeholder.select-category-first' | translate"
+                  />
+                }
+              }
+              @if (categoriaDe(condicao) && exibirErro(condicao.controls.valor)) {
+                <p class="form-error">{{ 'portal.generic.label.required-field' | translate }}</p>
+              }
+            </div>
+          </div>
+
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            class="btn--md btn--danger btn--text"
+            (click)="remover(i)"
+          ></button>
+        </div>
+      }
+    </div>
+  }
+
+  <div>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-plus"
+      class="btn--dashed"
+      [label]="'portal.generic.label.add-condition' | translate"
+      (click)="adicionar()"
+    ></button>
+  </div>
+</div>

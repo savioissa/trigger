@@ -1,0 +1,81 @@
+/* Estilos globais da aplicação.
+   Ordem de carga (angular.json): tema PrimeNG → primeng.css → primeicons → styles/design-system.css → este arquivo.
+   Aqui ficam só as classes novas que a tela de gatilho precisou, no mesmo padrão do design system. */
+
+/* ===== Campos de formulário (40px, mesmo visual do .ui-input) ===== */
+.form-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.form-field > p-dropdown,
+.form-field > p-calendar,
+.form-field > p-inputnumber { display: block; width: 100%; min-width: 0; }
+
+.form-label { font: var(--label-field); color: #1F2937; }
+.form-label__required { color: #DC2626; margin-left: 2px; }
+.form-overline { font: var(--label-overline); letter-spacing: var(--letter-spacing-overline); text-transform: uppercase; color: #6B7280; }
+.form-error { margin: 0; font: var(--secondary-sm); color: #DC2626; }
+
+.p-inputtext.campo { width: 100%; height: 40px; padding: 0 12px; border: 1px solid #CBD5E1; border-radius: 6px; background: #fff; color: #1E293B; font: var(--secondary-lg); box-sizing: border-box; }
+.p-inputtext.campo-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 6px; background: #fff; color: #1E293B; font: var(--secondary-lg); box-sizing: border-box; resize: vertical; display: block; }
+.p-inputtext.campo::placeholder, .p-inputtext.campo-textarea::placeholder { color: #6B7280; }
+.p-inputtext.campo:enabled:hover, .p-inputtext.campo-textarea:enabled:hover { border-color: #3B82F6; }
+.p-inputtext.campo:enabled:focus, .p-inputtext.campo-textarea:enabled:focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #3B82F655; outline: none; }
+
+.p-dropdown.campo { display: flex; width: 100%; height: 40px; align-items: center; border: 1px solid #CBD5E1; border-radius: 6px; background: #fff; }
+.p-dropdown.campo .p-dropdown-label { padding: 0 12px; font: var(--secondary-lg); color: #1E293B; }
+.p-dropdown.campo .p-dropdown-label.p-placeholder { color: #6B7280; }
+.p-dropdown.campo .p-dropdown-trigger { width: 40px; color: #4B5563; }
+.p-dropdown.campo .p-dropdown-trigger .p-icon { width: 14px; height: 14px; }
+.p-dropdown.campo:not(.p-disabled):hover { border-color: #3B82F6; }
+.p-dropdown.campo:not(.p-disabled).p-focus { border-color: #3B82F6; box-shadow: 0 0 0 2px #3B82F655; }
+
+.campo-painel.p-dropdown-panel .p-dropdown-items { padding: 4px; }
+.campo-painel.p-dropdown-panel .p-dropdown-item { padding: 8px 12px; border-radius: 4px; font: var(--secondary-lg); color: #1E293B; }
+.campo-painel.p-dropdown-panel .p-dropdown-item.p-highlight { background: #E9F2FF; color: #1d4ed8; }
+.campo-painel.p-dropdown-panel .p-dropdown-header { padding: 8px; }
+/* Cabeçalho de grupo (dropdown com [group]): mesmo estilo dos rótulos overline */
+.campo-painel.p-dropdown-panel .p-dropdown-item-group { padding: 8px 12px 4px; background: transparent; font: var(--label-overline); letter-spacing: var(--letter-spacing-overline); text-transform: uppercase; color: #6B7280; }
+/* Desabilitado: fundo cinza em vez da opacidade padrão do tema, para o texto continuar legível */
+.p-dropdown.campo.p-disabled { opacity: 1; background: #F3F4F6; border-color: #E5E7EB; }
+.p-dropdown.campo.p-disabled .p-dropdown-label,
+.p-dropdown.campo.p-disabled .p-dropdown-label.p-placeholder,
+.p-dropdown.campo.p-disabled .p-dropdown-trigger { color: #9CA3AF; }
+.campo-painel.p-dropdown-panel .p-dropdown-filter { height: 32px; font: var(--secondary-md); }
+
+.p-inputnumber.campo-host, .p-calendar.campo-host { display: flex; width: 100%; }
+.p-calendar.campo-host .p-datepicker-trigger-icon { color: #4B5563; }
+
+/* Estado inválido: aplicado pelo componente quando o campo foi tocado ou o formulário enviado */
+.campo--invalido .p-inputtext,
+.campo--invalido.p-inputtext,
+.campo--invalido .p-dropdown,
+.campo--invalido.p-dropdown { border-color: #DC2626 !important; }
+
+/* ===== Card de item editável (condição, ação) com botão de remover à direita ===== */
+.item-linha { display: grid; grid-template-columns: minmax(0, 1fr) 32px; align-items: center; gap: 16px; }
+.item-card { padding: 16px; background: #F8F9FB; border: 1px solid #D9DCE1; border-radius: 8px; min-width: 0; }
+
+/* ===== Botão tracejado de "Adicionar ..." ===== */
+.p-button.btn--dashed { height: 38px; padding: 0 16px; gap: 8px; background: transparent; color: #1d4ed8; border: 1px dashed #9CA3AF; border-radius: 4px; box-shadow: none; font-size: 14px; font-weight: 500; box-sizing: border-box; }
+.p-button.btn--dashed .p-button-icon { font-size: 14px; }
+.p-button.btn--dashed .p-button-label { font-weight: 500; }
+.p-button.btn--dashed:not(:disabled):hover { background: #F1F6FF; color: #1e40af; border-color: #60A5FA; }
+
+/* ===== Botão com aparência de link ===== */
+.link-btn { padding: 0; border: 0; background: none; color: #2563EB; font: var(--secondary-md); cursor: pointer; text-align: left; }
+.link-btn:hover { color: #1d4ed8; text-decoration: underline; }
+.link-btn:focus-visible { outline: 2px solid #3B82F655; outline-offset: 2px; border-radius: 2px; }
+
+/* ===== Toast abaixo do cabeçalho fixo (68px), para não cobrir os botões Cancelar/Criar ===== */
+.p-toast.p-toast-top-right { top: 80px; }
+
+/* ===== Tooltip com texto mais longo (padrão do PrimeNG é 12.5rem) ===== */
+.p-tooltip.tooltip--largo { max-width: 320px; }
+.p-tooltip.tooltip--largo .p-tooltip-text { font: var(--secondary-md); }
+
+/* ===== Abas do painel de placeholders ===== */
+.placeholders-tabs .p-tabview-nav-content { border-bottom: 1px solid #E5E7EB; padding: 0 8px; }
+.placeholders-tabs .p-tabview-nav { background: transparent; border: 0; }
+.placeholders-tabs .p-tabview-nav li .p-tabview-nav-link { background: transparent; padding: 8px 12px; margin-bottom: -1px; border-width: 0 0 2px; font: 500 13px/20px var(--font-family-text); color: #4B5563; }
+.placeholders-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link { color: #2563EB; border-color: #3B82F6; }
+.placeholders-tabs .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link { background: transparent; color: #1F2937; border-color: #D1D5DB; }
+.placeholders-tabs .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus-visible { box-shadow: inset 0 0 0 2px #3B82F655; }
+.placeholders-tabs .p-tabview-panels { background: transparent; padding: 8px 0; }

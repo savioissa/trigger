@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.grupo__titulo {
+  margin: 0;
+  font: 500 14px/21px var(--font-family-text);
+  color: #1F2937;
+}
+
+.grupo__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Proporções do print: categoria maior, operador e valor iguais */
+.condicao {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}

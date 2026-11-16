@@ -1,0 +1,189 @@
+<form class="pagina" [formGroup]="form" novalidate>
+  <header class="pagina__cabecalho">
+    <h1 class="t-title-lg pagina__titulo">{{ 'portal.generic.label.new-trigger' | translate }}</h1>
+    <div class="pagina__botoes">
+      <button
+        pButton
+        type="button"
+        class="btn--md btn--neutral"
+        [label]="'portal.generic.button.cancel' | translate"
+        (click)="cancelar()"
+      ></button>
+      <!-- O tooltip fica no wrapper porque botão desabilitado não dispara eventos de mouse -->
+      <span
+        class="pagina__criar"
+        [pTooltip]="'portal.generic.label.create-trigger-requirements' | translate"
+        [tooltipDisabled]="form.valid"
+        tooltipPosition="left"
+        tooltipStyleClass="tooltip--largo"
+      >
+        <button
+          pButton
+          type="button"
+          class="btn--md btn--primary"
+          [label]="'portal.generic.button.create' | translate"
+          [loading]="salvando()"
+          [disabled]="form.invalid || salvando()"
+          (click)="criar()"
+        ></button>
+      </span>
+    </div>
+  </header>
+
+  <div class="pagina__conteudo" [attr.aria-busy]="carregando()">
+    @if (carregando()) {
+    <!-- Carregando: skeleton no lugar de todos os blocos do conteúdo -->
+    <div aria-hidden="true">
+      <div class="dados">
+        <div class="esqueleto__campo">
+          <div class="skeleton esqueleto__rotulo"></div>
+          <div class="skeleton esqueleto__input"></div>
+        </div>
+        <div class="esqueleto__campo">
+          <div class="skeleton esqueleto__rotulo"></div>
+          <div class="skeleton esqueleto__input"></div>
+        </div>
+        <div class="esqueleto__campo dados__largo">
+          <div class="skeleton esqueleto__rotulo"></div>
+          <div class="skeleton esqueleto__textarea"></div>
+        </div>
+      </div>
+
+      <hr class="divisor" />
+
+      <div class="secao">
+        <div class="secao__cabecalho">
+          <div class="skeleton esqueleto__titulo"></div>
+          <div class="skeleton esqueleto__subtitulo"></div>
+        </div>
+        <div class="skeleton esqueleto__bloco"></div>
+        <div class="skeleton esqueleto__bloco"></div>
+      </div>
+
+      <hr class="divisor" />
+
+      <div class="secao">
+        <div class="secao__cabecalho">
+          <div class="skeleton esqueleto__titulo"></div>
+          <div class="skeleton esqueleto__subtitulo"></div>
+        </div>
+        <div class="skeleton esqueleto__bloco"></div>
+      </div>
+    </div>
+    } @else {
+    <!-- Dados gerais -->
+    <section class="dados">
+      <div class="form-field">
+        <label class="form-label" for="gatilho-descricao">
+          {{ 'iclass.generic.label.description' | translate }}<span class="form-label__required" aria-hidden="true">*</span>
+        </label>
+        <input
+          pInputText
+          id="gatilho-descricao"
+          type="text"
+          formControlName="descricao"
+          class="campo"
+          required
+          [class.campo--invalido]="exibirErro(form.controls.descricao)"
+          [attr.aria-describedby]="exibirErro(form.controls.descricao) ? 'gatilho-descricao-erro' : null"
+          [placeholder]="'portal.generic.placeholder.trigger-description' | translate"
+        />
+        @if (exibirErro(form.controls.descricao)) {
+          <p class="form-error" id="gatilho-descricao-erro">{{ 'portal.generic.label.required-field' | translate }}</p>
+        }
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="gatilho-status">{{ 'portal.generic.label.status' | translate }}</label>
+        <p-dropdown
+          formControlName="status"
+          inputId="gatilho-status"
+          [options]="statusOpcoes"
+          appendTo="body"
+          styleClass="campo"
+          panelStyleClass="campo-painel"
+        >
+          <ng-template pTemplate="selectedItem" let-status>{{ tagStatus[status] | translate }}</ng-template>
+          <ng-template pTemplate="item" let-status>{{ tagStatus[status] | translate }}</ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="form-field dados__largo">
+        <label class="form-label" for="gatilho-observacoes">{{ 'portal.generic.label.notes' | translate }}</label>
+        <textarea
+          pInputTextarea
+          id="gatilho-observacoes"
+          formControlName="observacoes"
+          class="campo-textarea"
+          rows="3"
+          [placeholder]="'portal.generic.placeholder.trigger-notes' | translate"
+        ></textarea>
+      </div>
+    </section>
+
+    <hr class="divisor" />
+
+    <!-- Condições -->
+    <section class="secao" aria-labelledby="secao-condicoes">
+      <div class="secao__cabecalho">
+        <h2 class="t-title-sm secao__titulo" id="secao-condicoes">{{ 'portal.generic.label.conditions' | translate }}</h2>
+        <p class="secao__subtitulo">{{ 'portal.generic.label.conditions-set-trigger-execution' | translate }}</p>
+      </div>
+
+      <app-trigger-condition-group
+        [titulo]="'portal.generic.label.all-conditions-satisfied' | translate"
+        [condicoes]="form.controls.condicoesTodas"
+        [gruposCategoria]="categorias()"
+      />
+
+      <app-trigger-condition-group
+        [titulo]="'portal.generic.label.any-condition-satisfied' | translate"
+        [condicoes]="form.controls.condicoesQualquer"
+        [gruposCategoria]="categorias()"
+      />
+    </section>
+
+    <hr class="divisor" />
+
+    <!-- Ações -->
+    <section class="secao" aria-labelledby="secao-acoes">
+      <div class="secao__cabecalho">
+        <h2 class="t-title-sm secao__titulo" id="secao-acoes">{{ 'portal.generic.label.actions' | translate }}</h2>
+        <p class="secao__subtitulo">{{ 'portal.generic.label.define-trigger-actions' | translate }}</p>
+      </div>
+
+      <div class="acoes" [class.acoes--com-painel]="painelPlaceholdersAberto()">
+        <div class="acoes__lista">
+          @for (acao of form.controls.acoes.controls; track acao; let i = $index) {
+            <app-trigger-action
+              [form]="acao"
+              [webhooks]="webhooks()"
+              (remover)="removerAcao(i)"
+              (verPlaceholders)="painelPlaceholdersAberto.set(true)"
+            />
+          }
+
+          <div>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-plus"
+              class="btn--dashed"
+              [label]="'portal.generic.label.add-action' | translate"
+              (click)="adicionarAcao()"
+            ></button>
+          </div>
+        </div>
+
+        @if (painelPlaceholdersAberto()) {
+          <app-trigger-placeholders-panel
+            class="acoes__painel"
+            [grupos]="placeholders()"
+            (fechar)="painelPlaceholdersAberto.set(false)"
+          />
+        }
+      </div>
+    </section>
+    }
+  </div>
+</form>

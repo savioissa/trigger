@@ -1,0 +1,124 @@
+{
+  "dateFormat": "dd/mm/yy",
+  "dayNamesMin": {
+    "0": "Do",
+    "1": "Se",
+    "2": "Te",
+    "3": "Qu",
+    "4": "Qu",
+    "5": "Se",
+    "6": "Sa"
+  },
+  "firstDayOfWeek": "0",
+  "iclass": {
+    "generic": {
+      "label": {
+        "copied-to-clipboard": "Copiado para área de transferência",
+        "description": "Descrição",
+        "select-operator": "Operador"
+      }
+    }
+  },
+  "monthNames": {
+    "0": "Janeiro",
+    "1": "Fevereiro",
+    "2": "Março",
+    "3": "Abril",
+    "4": "Maio",
+    "5": "Junho",
+    "6": "Julho",
+    "7": "Agosto",
+    "8": "Setembro",
+    "9": "Outubro",
+    "10": "Novembro",
+    "11": "Dezembro"
+  },
+  "monthNamesShort": {
+    "0": "Jan",
+    "1": "Fev",
+    "2": "Mar",
+    "3": "Abr",
+    "4": "Mai",
+    "5": "Jun",
+    "6": "Jul",
+    "7": "Ago",
+    "8": "Set",
+    "9": "Out",
+    "10": "Nov",
+    "11": "Dez"
+  },
+  "portal": {
+    "createso": {
+      "placeholder": {
+        "find-category": "Selecione uma categoria"
+      }
+    },
+    "generic": {
+      "button": {
+        "cancel": "Cancelar",
+        "create": "Criar"
+      },
+      "label": {
+        "actions": "Ações",
+        "active": "Ativo",
+        "add-action": "Adicionar ação",
+        "add-condition": "Adicionar condição",
+        "all-conditions-satisfied": "Todas as condições devem ser atendidas",
+        "any-condition-satisfied": "Qualquer condição deve ser atendida",
+        "available-placeholders": "Placeholders disponíveis",
+        "category": "Categoria",
+        "conditions": "Condições",
+        "conditions-set-trigger-execution": "As condições determinam quando um gatilho deve ser executado",
+        "copied": "Copiado",
+        "copy-placeholder-manually": "Selecione o código do placeholder e copie manualmente.",
+        "create-trigger-requirements": "Preencha a descrição e ao menos uma condição completa para criar o gatilho.",
+        "define-trigger-actions": "O que acontece quando as condições são atendidas.",
+        "equal": "Igual a",
+        "error-creating-trigger": "Erro ao criar gatilho",
+        "error-loading-data": "Erro ao carregar dados",
+        "get-webhook": "Chamar webhook",
+        "greater-than": "Maior que",
+        "inactive": "Inativo",
+        "invalid-json": "JSON inválido. Verifique aspas, vírgulas e chaves.",
+        "less-than": "Menor que",
+        "method": "Método",
+        "new-trigger": "Novo Gatilho",
+        "notes": "Observações",
+        "operator-absent": "Ausente",
+        "operator-changed": "Alterado",
+        "operator-changed-from": "Alterado de",
+        "operator-changed-to": "Alterado para",
+        "operator-different": "Diferente",
+        "operator-not-changed": "Não alterado",
+        "operator-not-changed-from": "Não alterado de",
+        "operator-not-changed-to": "Não alterado para",
+        "operator-present": "Presente",
+        "request-body-json": "Corpo da requisição (JSON)",
+        "required-field": "Campo obrigatório.",
+        "select": "Selecione",
+        "status": "Status",
+        "trigger": "Gatilho",
+        "trigger-created": "Gatilho criado",
+        "trigger-created-successfully": "O gatilho foi criado com sucesso",
+        "type": "Tipo",
+        "unable-create-trigger": "Não foi possível criar o gatilho. Tente novamente.",
+        "unable-load-form-options": "Não foi possível carregar as opções do formulário.",
+        "unable-to-copy": "Não foi possível copiar",
+        "url": "URL",
+        "value": "Valor",
+        "view-available-placeholders": "Visualizar placeholders disponíveis"
+      },
+      "placeholder": {
+        "number-value": "0",
+        "select-category-first": "Escolha a categoria primeiro",
+        "select-value": "Selecione o valor",
+        "select-webhook": "Selecione o webhook",
+        "trigger-description": "Ex.: Avisar cliente quando a OS for concluída",
+        "trigger-notes": "Anotações internas sobre este gatilho (opcional)",
+        "type-value": "Digite o valor",
+        "value-not-applicable": "Não se aplica a este operador"
+      },
+      "results-not-found": "Nenhum resultado encontrado"
+    }
+  }
+}
